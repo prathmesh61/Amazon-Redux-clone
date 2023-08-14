@@ -1,9 +1,13 @@
-// "use client";
+"use client";
 
 import Image from "next/image";
-import React, { useContext } from "react";
-
+import React from "react";
+import { useDispatch, useSelector } from "react-redux";
+import { addToCart } from "../redux/features/cartSlice";
+import { toast } from "react-toastify";
 const ProductCard = ({ product }) => {
+  const { cart } = useSelector((state) => state.cart);
+  const dispatch = useDispatch();
   return (
     <div className="bg-white flex flex-col justify-center items-center shadow-sm p-10 m-5 relative z-30 ">
       <p className="absolute top-2 right-2 text-sm italic text-gray-400">
@@ -17,9 +21,15 @@ const ProductCard = ({ product }) => {
         {product.description.slice(0, 100) + "..."}
       </p>
       <p className="text-lg font-bold mt-2 ">${product.price}</p>
-      <button className="bg-orange-300 hover:bg-orange-400 mt-2 w-full text-black px-3 py-1 rounded-md ">
+      <button
+        className="bg-orange-300 hover:bg-orange-400 mt-2 w-full text-black px-3 py-1 rounded-md "
+        onClick={() =>
+          dispatch(addToCart(product), toast.success("Product added to cart"))
+        }
+      >
         Add to basket
       </button>
+      <div className="flex flex-col"></div>
     </div>
   );
 };

@@ -1,3 +1,4 @@
+"use client";
 import React from "react";
 import Image from "next/image";
 import amazon1 from "../assets/amazon1.png";
@@ -8,13 +9,17 @@ import { MdKeyboardArrowDown } from "react-icons/md";
 import { AiOutlineShoppingCart } from "react-icons/ai";
 import { AiFillAmazonSquare } from "react-icons/ai";
 import { BiCategory } from "react-icons/bi";
+import { useSelector } from "react-redux";
+import Link from "next/link";
 const Navbar = () => {
+  const cart = useSelector((state) => state.cart.cart);
+
   return (
     <>
       <div className="flex justify-between items-center h-16 bg-[#131A22] gap-4 max-w-full mx-auto  px-6">
-        <div className="w-10 h-8 flex items-center  ">
+        <Link href={"/"} className="w-10 h-8 flex items-center  ">
           <AiFillAmazonSquare className="w-16 text-white h-16" />
-        </div>
+        </Link>
         <div className="flex flex-grow  ">
           <input
             type="text"
@@ -44,10 +49,15 @@ const Navbar = () => {
               <MdKeyboardArrowDown className="text-white w-4 h-4" />
             </p>
           </div>
-          <div className="flex justify-center items-center space-x-2">
-            <AiOutlineShoppingCart className="text-white w-8 h-8" />
-            <p className="font-bold text-xs text-white">Cart </p>
-          </div>
+          <Link
+            href={"/cart"}
+            className="flex justify-center items-center space-x-2"
+          >
+            <AiOutlineShoppingCart className="text-white w-8 h-8 cursor-pointer" />
+            <p className="font-bold text-xs text-white cursor-pointer">
+              Cart {cart.length}
+            </p>
+          </Link>
         </div>
       </div>
 
