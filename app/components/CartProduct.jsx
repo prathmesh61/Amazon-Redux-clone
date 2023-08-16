@@ -9,8 +9,11 @@ const CartProduct = ({ cart }) => {
   const dispatch = useDispatch();
   console.log(cart);
   return (
-    <div className="p-10 flex md:flex-row justify-between items-center w-full rounded-md shadow-lg flex-col">
-      <img src={cart?.image} className="w-[80px] h-[80px]" alt="" />
+    <div
+      className="p-10 flex md:flex-row justify-between items-center w-full rounded-md shadow-lg flex-col"
+      key={cart?.id}
+    >
+      <img src={cart?.image} className="w-[80px] h-[80px]" alt={cart?.title} />
       <div className="flex flex-col justify-start items-start">
         <p className="text-2xl font-normal text-left">
           {cart?.title.slice(0, 20)}
